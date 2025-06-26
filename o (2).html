@@ -1,0 +1,267 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+</head>
+<body>
+  <header>
+  <div id="box">portfolio</div>
+    <div class="container">
+      <h1>Prajwal Shrestha</h1>
+       <marquee behoviour="scroll" direction="left"> <p>Web Developer & Designer</p></marquee>
+    </div>
+  </header>
+
+  <section class="container">
+    <h2>About Me</h2>
+  <p>Hello! I'm Prajwal, a passionate developer who loves creating beautiful and functional websites.</p>
+  </section>
+  <hr>
+  <section  class="container">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>A personal portfolio to showcase my skills and projects.</p>
+      </div>
+      <div class="project-card">
+        <h3>Online Store</h3>
+        <p>A mock e-commerce website using HTML, CSS, and JS.</p>
+      </div>
+      <div class="project-card">
+      <h3>Calculator</h3>
+      <p> With this calculator every mathematical problems can be solved</p>
+      </div>
+      
+    </div>
+  </section>
+   <hr>
+  <section  class="container">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+<h2 id="fun"> lets have some fun</h2>
+<section class="container" id="quiz-section">
+  <h2>Gaming Quiz</h2>
+  <div id="quiz-container">
+    <p id="question">Loading question...</p>
+    <div id="options"></div>
+    <button id="nextBtn" style="display:none;">Next</button>
+    <p id="scoreDisplay"></p>
+  </div></section>
+  <footer>
+    <p>&copy; 2025 Prajwal Shrestha. All rights reserved.</p>
+  </footer>
+</body>
+</html><style>* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+#box{
+  border-radius:10px;
+  background-color:aqua;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding:30px 0;
+}
+
+header {
+  background: #222;
+  color: #fff;
+  padding:40px;
+  text-align: center;
+}
+
+
+
+
+header p {
+  font-size:20px;
+  margin-top:5px;
+  color:aqua;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 30px;
+  color:aqua;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.project-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form input,
+form textarea {
+  padding: 18px;
+  border: 1px solid ;
+  border-radius: 5px;
+
+}
+
+form button {
+  padding: 18px;
+  background: #222;
+  color: white;
+  border-radius: 5px;
+}
+
+form button:hover {
+  background: #555;
+}
+
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+}
+#quiz-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#quiz-container button {
+  background-color: #222;
+  color: white;
+}
+
+#quiz-container button:hover {
+  background-color: #555;
+}
+
+#fun{
+  padding:20px;
+  color:black;
+}</style><script>
+  const quizData = [
+    {
+      question: "Which language is used for styling web pages?",
+      options: ["HTML", "CSS", "JavaScript", "Python"],
+      correct: "CSS"
+    },
+    {
+      question: "Which game is a Battle Royale?",
+      options: ["Minecraft", "Free Fire", "Clash of Clans", "Temple Run"],
+      correct: "Free Fire"
+    },
+    {
+      question: "What does HTML stand for?",
+      options: [
+        "HighText Machine Language",
+        "HyperText and Links Markup Language",
+        "HyperText Markup Language",
+        "None of these"
+      ],
+      correct: "HyperText Markup Language"
+    },
+    {
+      question:"who is goat of football?",
+      options:[
+       "lionel andress messi",
+       "cristiano ronaldo",
+       "pele",
+       "maradona"
+      ],
+      correct:"lionel andress messi"
+    },
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+
+  const questionEl = document.getElementById("question");
+  const optionsEl = document.getElementById("options");
+  const nextBtn = document.getElementById("nextBtn");
+  const scoreDisplay = document.getElementById("scoreDisplay");
+
+  function showQuestion(index) {
+    const q = quizData[index];
+    questionEl.textContent = q.question;
+    optionsEl.innerHTML = "";
+
+    q.options.forEach((option) => {
+      const btn = document.createElement("button");
+      btn.textContent = option;
+      btn.style.padding = "10px";
+      btn.style.margin = "5px";
+      btn.style.borderRadius = "5px";
+      btn.style.border = "1px solid #ccc";
+      btn.style.cursor = "pointer";
+      btn.onclick = () => checkAnswer(btn.textContent);
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function checkAnswer(selected) {
+    const correctAnswer = quizData[currentQuestion].correct;
+    if (selected === correctAnswer) {
+      score++;
+    }
+
+    currentQuestion++;
+    nextBtn.style.display = "inline-block";
+    disableOptions();
+  }
+
+  function disableOptions() {
+    const buttons = optionsEl.querySelectorAll("button");
+    buttons.forEach(btn => btn.disabled = true);
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (currentQuestion < quizData.length) {
+      showQuestion(currentQuestion);
+      nextBtn.style.display = "none";
+    } else {
+      showScore();
+    }
+  });
+
+  function showScore() {
+    questionEl.textContent = "Quiz Completed!";
+    optionsEl.innerHTML = "";
+    nextBtn.style.display = "none";
+    scoreDisplay.textContent = `You scored ${score} out of ${quizData.length}`;
+  }
+
+  // Load the first question
+  showQuestion(currentQuestion);
+</script>
